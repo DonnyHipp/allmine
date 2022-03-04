@@ -1,0 +1,1304 @@
+ import mimetypes
+import linecache
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QMessageBox
+from scipy.optimize import linprog
+import numpy as np
+
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(1066, 672)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.comboBox_9 = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBox_9.setGeometry(QtCore.QRect(900, 230, 51, 26))
+        self.comboBox_9.setObjectName("comboBox_9")
+        self.comboBox_9.addItem("")
+        self.comboBox_9.addItem("")
+        self.comboBox_9.addItem("")
+        self.label_14 = QtWidgets.QLabel(self.centralwidget)
+        self.label_14.setGeometry(QtCore.QRect(390, 360, 641, 31))
+        self.label_14.setObjectName("label_14")
+        self.comboBox_11 = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBox_11.setGeometry(QtCore.QRect(900, 330, 51, 26))
+        self.comboBox_11.setObjectName("comboBox_11")
+        self.comboBox_11.addItem("")
+        self.comboBox_11.addItem("")
+        self.comboBox_11.addItem("")
+        self.label_12 = QtWidgets.QLabel(self.centralwidget)
+        self.label_12.setGeometry(QtCore.QRect(390, 80, 571, 31))
+        self.label_12.setObjectName("label_12")
+        self.textEdit_11 = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit_11.setGeometry(QtCore.QRect(570, 480, 271, 41))
+        self.textEdit_11.setObjectName("textEdit_11")
+        self.comboBox_7 = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBox_7.setGeometry(QtCore.QRect(900, 140, 51, 26))
+        self.comboBox_7.setObjectName("comboBox_7")
+        self.comboBox_7.addItem("")
+        self.comboBox_7.addItem("")
+        self.comboBox_7.addItem("")
+        self.verticalLayoutWidget_3 = QtWidgets.QWidget(self.centralwidget)
+        self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(390, 139, 71, 221))
+        self.verticalLayoutWidget_3.setObjectName("verticalLayoutWidget_3")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_3)
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.label_3 = QtWidgets.QLabel(self.verticalLayoutWidget_3)
+        self.label_3.setAutoFillBackground(False)
+        self.label_3.setStyleSheet("font: 14pt \"Lucida Grande\";")
+        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_3.setObjectName("label_3")
+        self.verticalLayout_4.addWidget(self.label_3)
+        self.label_5 = QtWidgets.QLabel(self.verticalLayoutWidget_3)
+        self.label_5.setAutoFillBackground(False)
+        self.label_5.setStyleSheet("font: 14pt \"Lucida Grande\";")
+        self.label_5.setScaledContents(True)
+        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_5.setObjectName("label_5")
+        self.verticalLayout_4.addWidget(self.label_5)
+        self.label_2 = QtWidgets.QLabel(self.verticalLayoutWidget_3)
+        self.label_2.setAutoFillBackground(False)
+        self.label_2.setStyleSheet("font: 14pt \"Lucida Grande\";\n"
+"\n"
+"")
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout_4.addWidget(self.label_2)
+        self.label = QtWidgets.QLabel(self.verticalLayoutWidget_3)
+        self.label.setAutoFillBackground(False)
+        self.label.setStyleSheet("font: 14pt \"Lucida Grande\";")
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.verticalLayout_4.addWidget(self.label)
+        self.label_4 = QtWidgets.QLabel(self.verticalLayoutWidget_3)
+        self.label_4.setAutoFillBackground(False)
+        self.label_4.setStyleSheet("font: 14pt \"Lucida Grande\";")
+        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_4.setObjectName("label_4")
+        self.verticalLayout_4.addWidget(self.label_4)
+        self.label_13 = QtWidgets.QLabel(self.centralwidget)
+        self.label_13.setGeometry(QtCore.QRect(390, 100, 641, 31))
+        self.label_13.setObjectName("label_13")
+        self.comboBox_10 = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBox_10.setGeometry(QtCore.QRect(900, 280, 51, 26))
+        self.comboBox_10.setObjectName("comboBox_10")
+        self.comboBox_10.addItem("")
+        self.comboBox_10.addItem("")
+        self.comboBox_10.addItem("")
+        self.label_11 = QtWidgets.QLabel(self.centralwidget)
+        self.label_11.setGeometry(QtCore.QRect(390, 30, 601, 41))
+        self.label_11.setStyleSheet("font: 24pt \"Lucida Grande\";")
+        self.label_11.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_11.setObjectName("label_11")
+        self.comboBox_6 = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBox_6.setGeometry(QtCore.QRect(850, 490, 79, 26))
+        self.comboBox_6.setObjectName("comboBox_6")
+        self.comboBox_6.addItem("")
+        self.comboBox_6.addItem("")
+        self.comboBox_8 = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBox_8.setGeometry(QtCore.QRect(900, 190, 51, 26))
+        self.comboBox_8.setObjectName("comboBox_8")
+        self.comboBox_8.addItem("")
+        self.comboBox_8.addItem("")
+        self.comboBox_8.addItem("")
+        self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(390, 390, 601, 41))
+        self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.label_6 = QtWidgets.QLabel(self.horizontalLayoutWidget)
+        self.label_6.setAutoFillBackground(False)
+        self.label_6.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);\n"
+"")
+        self.label_6.setMidLineWidth(0)
+        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_6.setObjectName("label_6")
+        self.horizontalLayout.addWidget(self.label_6)
+        self.comboBox_2 = QtWidgets.QComboBox(self.horizontalLayoutWidget)
+        self.comboBox_2.setObjectName("comboBox_2")
+        self.comboBox_2.addItem("")
+        self.comboBox_2.addItem("")
+        self.comboBox_2.addItem("")
+        self.horizontalLayout.addWidget(self.comboBox_2)
+        self.label_7 = QtWidgets.QLabel(self.horizontalLayoutWidget)
+        self.label_7.setAutoFillBackground(False)
+        self.label_7.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);\n"
+"")
+        self.label_7.setMidLineWidth(0)
+        self.label_7.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_7.setObjectName("label_7")
+        self.horizontalLayout.addWidget(self.label_7)
+        self.comboBox_3 = QtWidgets.QComboBox(self.horizontalLayoutWidget)
+        self.comboBox_3.setObjectName("comboBox_3")
+        self.comboBox_3.addItem("")
+        self.comboBox_3.addItem("")
+        self.comboBox_3.addItem("")
+        self.horizontalLayout.addWidget(self.comboBox_3)
+        self.label_8 = QtWidgets.QLabel(self.horizontalLayoutWidget)
+        self.label_8.setAutoFillBackground(False)
+        self.label_8.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);\n"
+"")
+        self.label_8.setMidLineWidth(0)
+        self.label_8.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_8.setObjectName("label_8")
+        self.horizontalLayout.addWidget(self.label_8)
+        self.comboBox = QtWidgets.QComboBox(self.horizontalLayoutWidget)
+        self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.horizontalLayout.addWidget(self.comboBox)
+        self.label_9 = QtWidgets.QLabel(self.horizontalLayoutWidget)
+        self.label_9.setAutoFillBackground(False)
+        self.label_9.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);\n"
+"")
+        self.label_9.setMidLineWidth(0)
+        self.label_9.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_9.setObjectName("label_9")
+        self.horizontalLayout.addWidget(self.label_9)
+        self.comboBox_4 = QtWidgets.QComboBox(self.horizontalLayoutWidget)
+        self.comboBox_4.setObjectName("comboBox_4")
+        self.comboBox_4.addItem("")
+        self.comboBox_4.addItem("")
+        self.comboBox_4.addItem("")
+        self.horizontalLayout.addWidget(self.comboBox_4)
+        self.label_10 = QtWidgets.QLabel(self.horizontalLayoutWidget)
+        self.label_10.setAutoFillBackground(False)
+        self.label_10.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);\n"
+"")
+        self.label_10.setMidLineWidth(0)
+        self.label_10.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_10.setObjectName("label_10")
+        self.horizontalLayout.addWidget(self.label_10)
+        self.comboBox_5 = QtWidgets.QComboBox(self.horizontalLayoutWidget)
+        self.comboBox_5.setObjectName("comboBox_5")
+        self.comboBox_5.addItem("")
+        self.comboBox_5.addItem("")
+        self.comboBox_5.addItem("")
+        self.horizontalLayout.addWidget(self.comboBox_5)
+
+        self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit.setGeometry(QtCore.QRect(470, 140, 421, 31))
+        self.textEdit.setObjectName("textEdit")
+        self.textEdit_2 = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit_2.setGeometry(QtCore.QRect(470, 190, 421, 31))
+        self.textEdit_2.setObjectName("textEdit_2")
+        self.textEdit_3 = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit_3.setGeometry(QtCore.QRect(470, 240, 421, 31))
+        self.textEdit_3.setObjectName("textEdit_3")
+        self.textEdit_4 = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit_4.setGeometry(QtCore.QRect(470, 290, 421, 31))
+        self.textEdit_4.setObjectName("textEdit_4")
+        self.textEdit_5 = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit_5.setGeometry(QtCore.QRect(470, 330, 421, 31))
+        self.textEdit_5.setObjectName("textEdit_5")
+        self.label_16 = QtWidgets.QLabel(self.centralwidget)
+        self.label_16.setGeometry(QtCore.QRect(20, 20, 371, 51))
+        self.label_16.setStyleSheet("font: 24pt \"Lucida Grande\";\n"
+"color: rgb(33, 80, 255);")
+        self.label_16.setObjectName("label_16")
+        self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
+        self.groupBox.setGeometry(QtCore.QRect(30, 110, 271, 141))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.groupBox.setFont(font)
+        self.groupBox.setObjectName("groupBox")
+        self.pushButton = QtWidgets.QPushButton(self.groupBox)
+        self.pushButton.setGeometry(QtCore.QRect(50, 110, 113, 32))
+        self.pushButton.setObjectName("pushButton")
+        self.label_18 = QtWidgets.QLabel(self.groupBox)
+        self.label_18.setGeometry(QtCore.QRect(10, 20, 91, 51))
+        self.label_18.setObjectName("label_18")
+        self.label_19 = QtWidgets.QLabel(self.groupBox)
+        self.label_19.setGeometry(QtCore.QRect(130, 20, 91, 51))
+        self.label_19.setObjectName("label_19")
+        self.comboBox_13 = QtWidgets.QComboBox(self.groupBox)
+        self.comboBox_13.setGeometry(QtCore.QRect(130, 70, 79, 26))
+        self.comboBox_13.setObjectName("comboBox_13")
+        self.comboBox_13.addItem("")
+        self.comboBox_13.addItem("")
+        self.comboBox_13.addItem("")
+        self.comboBox_13.addItem("")
+        self.comboBox_12 = QtWidgets.QComboBox(self.groupBox)
+        self.comboBox_12.setGeometry(QtCore.QRect(10, 70, 79, 26))
+        self.comboBox_12.setObjectName("comboBox_12")
+        self.comboBox_12.addItem("")
+        self.comboBox_12.addItem("")
+        self.comboBox_12.addItem("")
+        self.comboBox_12.addItem("")
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_2.setGeometry(QtCore.QRect(60, 280, 211, 41))
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_3.setGeometry(QtCore.QRect(60, 330, 211, 41))
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_4.setGeometry(QtCore.QRect(60, 380, 211, 41))
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.label_17 = QtWidgets.QLabel(self.centralwidget)
+        self.label_17.setGeometry(QtCore.QRect(30, 440, 321, 51))
+        self.label_17.setStyleSheet("color: rgb(250, 250, 255);\n"
+"font: 36pt \"Lucida Grande\";\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(36, 156, 0, 255), stop:1 rgba(255, 86, 39, 255));\n"
+"")
+        self.label_17.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_17.setObjectName("label_17")
+        self.label_20 = QtWidgets.QLabel(self.centralwidget)
+        self.label_20.setGeometry(QtCore.QRect(210, 510, 60, 21))
+        self.label_20.setObjectName("label_20")
+        self.label_21 = QtWidgets.QLabel(self.centralwidget)
+        self.label_21.setGeometry(QtCore.QRect(90, 550, 181, 21))
+        self.label_21.setObjectName("label_21")
+        self.label_22 = QtWidgets.QLabel(self.centralwidget)
+        self.label_22.setGeometry(QtCore.QRect(30, 590, 241, 21))
+        self.label_22.setObjectName("label_22")
+        self.label_23 = QtWidgets.QLabel(self.centralwidget)
+        self.label_23.setGeometry(QtCore.QRect(280, 510, 140, 21))
+        self.label_23.setObjectName("label_23")
+        self.label_24 = QtWidgets.QLabel(self.centralwidget)
+        self.label_24.setGeometry(QtCore.QRect(280, 550, 140, 21))
+        self.label_24.setObjectName("label_24")
+        self.label_25 = QtWidgets.QLabel(self.centralwidget)
+        self.label_25.setGeometry(QtCore.QRect(280, 590, 140, 21))
+        self.label_25.setObjectName("label_25")
+        self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_5.setGeometry(QtCore.QRect(800, 560, 211, 41))
+        self.pushButton_5.setStyleSheet("background-color: rgb(255, 65, 37);\n"
+"color: rgb(255, 255, 255);")
+        self.pushButton_5.setObjectName("pushButton_5")
+        self.pushButton_6 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_6.setGeometry(QtCore.QRect(370, 450, 161, 32))
+        self.pushButton_6.setStyleSheet("color: rgb(255, 0, 30);\n"
+"background-color: rgb(247, 255, 0);\n"
+"border-color: rgb(255, 0, 0);\n"
+"\n"
+"")
+        self.pushButton_6.setObjectName("pushButton_6")
+        self.textEdit_6 = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit_6.setGeometry(QtCore.QRect(970, 140, 41, 31))
+        self.textEdit_6.setObjectName("textEdit_6")
+        self.textEdit_7 = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit_7.setGeometry(QtCore.QRect(970, 190, 41, 31))
+        self.textEdit_7.setObjectName("textEdit_7")
+        self.textEdit_8 = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit_8.setGeometry(QtCore.QRect(970, 240, 41, 31))
+        self.textEdit_8.setObjectName("textEdit_8")
+        self.textEdit_9 = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit_9.setGeometry(QtCore.QRect(970, 290, 41, 31))
+        self.textEdit_9.setObjectName("textEdit_9")
+        self.textEdit_10 = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit_10.setGeometry(QtCore.QRect(970, 330, 41, 31))
+        self.textEdit_10.setObjectName("textEdit_10")
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1066, 24))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        self.textEdit.setDisabled(True)
+        self.textEdit_3.setDisabled(True)
+        self.textEdit_4.setDisabled(True)
+        self.textEdit_5.setDisabled(True)
+
+        self.textEdit_2.setDisabled(True)
+        self.textEdit_6.setDisabled(True)
+        self.textEdit_7.setDisabled(True)
+        self.textEdit_8.setDisabled(True)
+        self.textEdit_9.setDisabled(True)
+        self.textEdit_10.setDisabled(True)
+        self.textEdit_11.setDisabled(True)
+
+        self.comboBox_2.setDisabled(True)
+        self.comboBox_3.setDisabled(True)
+        self.comboBox_7.setDisabled(True)
+        self.comboBox_8.setDisabled(True)
+        self.comboBox_9.setDisabled(True)
+        self.comboBox_10.setDisabled(True)
+        self.comboBox_11.setDisabled(True)
+        self.comboBox.setDisabled(True)
+        self.comboBox_4.setDisabled(True)
+        self.comboBox_5.setDisabled(True)
+        self.comboBox_6.setDisabled(True)
+
+        self.var_count = None
+        self.ogr_count = None
+        self.respro = None
+        self.respro_r = None
+        self.respro_f = None
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.comboBox_9.setItemText(0, _translate("MainWindow", ">=0"))
+        self.comboBox_9.setItemText(1, _translate("MainWindow", "<=0"))
+
+        self.label_14.setText(_translate("MainWindow", "*В случае, если переменная равна нулю напишите ей все равно!"))
+        self.comboBox_11.setItemText(0, _translate("MainWindow", ">=0"))
+        self.comboBox_11.setItemText(1, _translate("MainWindow", "<=0"))
+
+        self.label_12.setText(_translate("MainWindow", "*Вводить стоит числа через пробел. Например: для x1+10x2-20x3, стоит ввести \"1 10 -20\""))
+        self.comboBox_7.setItemText(0, _translate("MainWindow", ">=0"))
+        self.comboBox_7.setItemText(1, _translate("MainWindow", "<=0"))
+
+        self.label_3.setText(_translate("MainWindow", "1"))
+        self.label_5.setText(_translate("MainWindow", "2"))
+        self.label_2.setText(_translate("MainWindow", "3"))
+        self.label.setText(_translate("MainWindow", "4"))
+        self.label_4.setText(_translate("MainWindow", "5"))
+        self.label_13.setText(_translate("MainWindow", "*Так же надо ввести ровно столько переменных, сколько вы выбрали! "))
+        self.comboBox_10.setItemText(0, _translate("MainWindow", ">=0"))
+        self.comboBox_10.setItemText(1, _translate("MainWindow", "<=0"))
+
+        self.label_11.setText(_translate("MainWindow", "Введите значения по инструкции"))
+        self.comboBox_6.setItemText(0, _translate("MainWindow", "max"))
+        self.comboBox_6.setItemText(1, _translate("MainWindow", "min"))
+        self.comboBox_8.setItemText(0, _translate("MainWindow", ">=0"))
+        self.comboBox_8.setItemText(1, _translate("MainWindow", "<=0"))
+
+        self.label_6.setText(_translate("MainWindow", "x1"))
+        self.comboBox_2.setItemText(0, _translate("MainWindow", ">=0"))
+        self.comboBox_2.setItemText(1, _translate("MainWindow", "<=0"))
+
+        self.label_7.setText(_translate("MainWindow", "x2"))
+        self.comboBox_3.setItemText(0, _translate("MainWindow", ">=0"))
+        self.comboBox_3.setItemText(1, _translate("MainWindow", "<=0"))
+
+        self.label_8.setText(_translate("MainWindow", "x3"))
+        self.comboBox.setItemText(0, _translate("MainWindow", ">=0"))
+        self.comboBox.setItemText(1, _translate("MainWindow", "<=0"))
+
+        self.label_9.setText(_translate("MainWindow", "x4"))
+        self.comboBox_4.setItemText(0, _translate("MainWindow", ">=0"))
+        self.comboBox_4.setItemText(1, _translate("MainWindow", "<=0"))
+
+        self.label_10.setText(_translate("MainWindow", "x5"))
+        self.comboBox_5.setItemText(0, _translate("MainWindow", ">=0"))
+        self.comboBox_5.setItemText(1, _translate("MainWindow", "<=0"))
+
+        self.label_16.setText(_translate("MainWindow", "Линейное программирование"))
+        self.groupBox.setTitle(_translate("MainWindow", "Введите кол-во переменных и ограничений"))
+        self.pushButton.setText(_translate("MainWindow", "Ввод"))
+        self.label_18.setText(_translate("MainWindow", "Переменные"))
+        self.label_19.setText(_translate("MainWindow", "Ограничения"))
+        self.comboBox_13.setItemText(0, _translate("MainWindow", "2"))
+        self.comboBox_13.setItemText(1, _translate("MainWindow", "3"))
+        self.comboBox_13.setItemText(2, _translate("MainWindow", "4"))
+        self.comboBox_13.setItemText(3, _translate("MainWindow", "5"))
+        self.comboBox_12.setItemText(0, _translate("MainWindow", "2"))
+        self.comboBox_12.setItemText(1, _translate("MainWindow", "3"))
+        self.comboBox_12.setItemText(2, _translate("MainWindow", "4"))
+        self.comboBox_12.setItemText(3, _translate("MainWindow", "5"))
+        self.pushButton_2.setText(_translate("MainWindow", "Ввод данных из файла"))
+        self.pushButton_3.setText(_translate("MainWindow", "Вычисление"))
+        self.pushButton_4.setText(_translate("MainWindow", "Сохранение в файл"))
+        self.label_17.setText(_translate("MainWindow", "Результат"))
+        self.label_20.setText(_translate("MainWindow", "Остатки:"))
+        self.label_21.setText(_translate("MainWindow", "Значение целевой функции:"))
+        self.label_22.setText(_translate("MainWindow", "Оптимальное значение переменных:"))
+        self.label_23.setText(_translate("MainWindow", "Нет"))
+        self.label_24.setText(_translate("MainWindow", "Нет"))
+        self.label_25.setText(_translate("MainWindow", "Нет"))
+        self.pushButton_5.setText(_translate("MainWindow", "Закрыть"))
+        self.pushButton_6.setText(_translate("MainWindow", "Очистить данные"))
+
+class MainWindow(QtWidgets.QMainWindow,QtWidgets.QFileDialog,QMessageBox, Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        # закрываем окно
+        self.pushButton_5.clicked.connect(self.closew)
+        self.pushButton.clicked.connect(self.net1)
+
+        self.pushButton_6.clicked.connect(self.clear1)
+        self.pushButton_3.clicked.connect(self.proverka_na_tip)
+        self.pushButton_3.clicked.connect(self.pro_r)
+        self.pushButton_3.clicked.connect(self.pro_f)
+        self.pushButton_3.clicked.connect(self.finalres)
+        self.pushButton_2.clicked.connect(self.fileop)
+        self.pushButton_4.clicked.connect(self.savef)
+
+    def savef(self):
+        fname = QFileDialog.getSaveFileName(self)[0]
+        try:
+            f = open(fname, 'w')
+            text1 ="Остатки:" + self.label_23.text()
+            text2 ="Значение целевой функции:" + self.label_24.text()
+            text3 = "Оптимальное значение переменных:" + self.label_25.text()
+            textres = text1 + '\n' + text2 + '\n' + text3
+            f.write(textres)
+            f.close
+
+        except FileNotFoundError:
+            self.er2 = QMessageBox()
+            self.er2.setWindowTitle("Ошибка!")
+            self.er2.setText(
+                "Вы не сохранили результат!")
+            self.er2.setIcon(QMessageBox.Icon.Warning)
+            self.er2.setStandardButtons(QMessageBox.Cancel)
+            self.er2.exec_()
+
+    def fileop(self):
+        fname = QFileDialog.getOpenFileName(self)[0]
+
+        try:
+            f = open(fname, 'r')
+            if mimetypes.guess_type(fname)[0] == 'text/plain':
+
+            # file is plaintext
+
+                with f:
+                    data = f.read()
+
+                line = data.split('\n', 1)[0]
+                self.textEdit.setText(line)
+
+                line = data.split('\n', 2)[1]
+                self.textEdit_2.setText(line)
+
+                line = data.split('\n', 3)[2]
+                self.textEdit_3.setText(line)
+
+                line = data.split('\n', 4)[3]
+                self.textEdit_4.setText(line)
+
+                line = data.split('\n', 5)[4]
+                self.textEdit_5.setText(line)
+
+                line = data.split('\n', 6)[5]
+                self.textEdit_6.setText(line)
+
+                line = data.split('\n', 7)[6]
+                self.textEdit_7.setText(line)
+
+                line = data.split('\n', 8)[7]
+                self.textEdit_8.setText(line)
+
+                line = data.split('\n', 9)[8]
+                self.textEdit_9.setText(line)
+
+                line = data.split('\n', 10)[9]
+                self.textEdit_10.setText(line)
+
+                line = data.split('\n', 11)[10]
+                self.textEdit_11.setText(line)
+
+                line = data.split('\n', 12)[11]
+                var_ch = int(line[0])
+                self.er4 = QMessageBox()
+                self.er4.setWindowTitle("Ошибка!")
+                self.er4.setText(
+                    "В выбранном файле нет данных о переменных!")
+                self.er4.setIcon(QMessageBox.Icon.Warning)
+                self.er4.setStandardButtons(QMessageBox.Cancel)
+
+                self.er3 = QMessageBox()
+                self.er3.setWindowTitle("Ошибка!")
+                self.er3.setText(
+                    "Количество переменных выходит из поддерживаемого диапазона!")
+                self.er3.setIcon(QMessageBox.Icon.Warning)
+                self.er3.setStandardButtons(QMessageBox.Cancel)
+
+                if line != '':
+                    if var_ch<6 and var_ch>1:
+                        self.var_count = var_ch
+                    else:
+
+                        self.er4.exec_()
+                else:
+                    self.er3.exec_()
+
+                line = data.split('\n', 13)[12]
+                ogr_ch = int(line[0])
+                if line != '':
+                    if int(line)<6 and int(line)>1:
+                        self.ogr_count = ogr_ch
+                    else:
+                        self.er4.exec_()
+                else:
+                    self.er3.exec_()
+            else:
+                self.er1 = QMessageBox()
+                self.er1.setWindowTitle("Ошибка!")
+                self.er1.setText(
+                    "Выбранный файл должен быть формата txt!")
+                self.er1.setIcon(QMessageBox.Icon.Warning)
+                self.er1.setStandardButtons(QMessageBox.Cancel)
+                self.er1.exec_()
+        except FileNotFoundError:
+            self.er2 = QMessageBox()
+            self.er2.setWindowTitle("Ошибка!")
+            self.er2.setText(
+                "Нет выбранного файла")
+            self.er2.setIcon(QMessageBox.Icon.Warning)
+            self.er2.setStandardButtons(QMessageBox.Cancel)
+            self.er2.exec_()
+    def finalres(self):
+
+
+        if self.respro == 1 and self.respro_r ==1 and self.respro_f == 1:
+            opt = 0
+            obj = []
+            s_func =  self.textEdit_11.toPlainText()
+            obj = [int(i) for i in s_func.split()]
+            if self.comboBox_6.currentText() =="max":
+                obj = [i * -1 for i in obj]
+
+            if self.ogr_count ==2:
+                # левая часть уравнения
+
+                s21 = self.textEdit.toPlainText()
+                s22 = self.textEdit_2.toPlainText()
+                s23 = self.textEdit_3.toPlainText()
+                a22 = []
+                a21 = []
+
+                a21 = [int(i) for i in s21.split()]
+
+                if self.comboBox_7.currentText() == "<=":
+                    a21 = [i * -1 for i in a21]
+
+                a22 = [int(i) for i in s22.split()]
+
+                if self.comboBox_8.currentText() == "<=":
+                    a22 = [i * -1 for i in a22]
+
+                lhs_ineq = []
+                lhs_ineq.append(a21)
+                lhs_ineq.append(a22)
+
+                # правая часть уравнения
+                s211 = self.textEdit_6.toPlainText()
+                s221 = self.textEdit_7.toPlainText()
+                a211 = []
+                a221 = []
+                a211 = [int(i) for i in s211.split()]
+                if self.comboBox_7.currentText() == "<=":
+                    a211 = [i * -1 for i in a211]
+
+                a221 = [int(i) for i in s221.split()]
+                if self.comboBox_8.currentText() == "<=":
+                    a221 = [i * -1 for i in a221]
+
+                rhs_ineq = []
+                rhs_ineq.append(a211)
+                rhs_ineq.append(a221)
+
+            if self.ogr_count ==3:
+                #левая часть уравнения
+
+                s21 = self.textEdit.toPlainText()
+                s22 = self.textEdit_2.toPlainText()
+                s23 = self.textEdit_3.toPlainText()
+                a22 = []
+                a21 = []
+                a23 = []
+
+                a21 = [int(i) for i in s21.split()]
+
+                if self.comboBox_7.currentText() =="<=":
+                    a21 = [i * -1 for i in a21]
+
+                a22 = [int(i) for i in s22.split()]
+
+                if self.comboBox_8.currentText() =="<=":
+                    a22 = [i * -1 for i in a22]
+
+                a23 = [int(i) for i in s23.split()]
+
+                if self.comboBox_9.currentText() =="<=":
+                    a23 = [i * -1 for i in a23]
+                lhs_ineq =[]
+                lhs_ineq.append(a21)
+                lhs_ineq.append(a22)
+                lhs_ineq.append(a23)
+
+                #правая часть уравнения
+                s211 = self.textEdit_6.toPlainText()
+                s221 = self.textEdit_7.toPlainText()
+                s231 = self.textEdit_8.toPlainText()
+                a211 = []
+                a221 = []
+                a231 = []
+                a211 = [int(i) for i in s211.split()]
+                if self.comboBox_7.currentText() =="<=":
+                    a211 = [i * -1 for i in a211]
+                a221 = [int(i) for i in s221.split()]
+                if self.comboBox_8.currentText() =="<=":
+                    a221 = [i * -1 for i in a221]
+
+                a231 = [int(i) for i in s231.split()]
+                if self.comboBox_9.currentText() =="<=":
+                    a231 = [i * -1 for i in a231]
+                rhs_ineq = []
+                rhs_ineq.append(a211)
+                rhs_ineq.append(a221)
+                rhs_ineq.append(a231)
+
+            if self.ogr_count ==4:
+                #левая часть уравнения
+
+                s21 = self.textEdit.toPlainText()
+                s22 = self.textEdit_2.toPlainText()
+                s23 = self.textEdit_3.toPlainText()
+                s24 = self.textEdit_4.toPlainText()
+                a22 = []
+                a21 = []
+                a23 = []
+                a24 = []
+
+                a21 = [int(i) for i in s21.split()]
+                if self.comboBox_7.currentText() =="<=":
+                    a21 = [i * -1 for i in a21]
+
+                a22 = [int(i) for i in s22.split()]
+                if self.comboBox_8.currentText() =="<=":
+                    a22 = [i * -1 for i in a22]
+
+                a23 = [int(i) for i in s23.split()]
+                if self.comboBox_9.currentText() =="<=":
+                    a23 = [i * -1 for i in a23]
+
+                a24 = [int(i) for i in s24.split()]
+                if self.comboBox_10.currentText() == "<=":
+                    a24 = [i * -1 for i in a24]
+
+                lhs_ineq =[]
+                lhs_ineq.append(a21)
+                lhs_ineq.append(a22)
+                lhs_ineq.append(a23)
+                lhs_ineq.append(a24)
+
+                #правая часть уравнения
+                s211 = self.textEdit_6.toPlainText()
+                s221 = self.textEdit_7.toPlainText()
+                s231 = self.textEdit_8.toPlainText()
+                s241 = self.textEdit_9.toPlainText()
+                a211 = []
+                a221 = []
+                a231 = []
+                a241 = []
+                a211 = [int(i) for i in s211.split()]
+                if self.comboBox_7.currentText() =="<=":
+                    a211 = [i * -1 for i in a211]
+                a221 = [int(i) for i in s221.split()]
+                if self.comboBox_8.currentText() =="<=":
+                    a221 = [i * -1 for i in a221]
+
+                a231 = [int(i) for i in s231.split()]
+                if self.comboBox_9.currentText() =="<=":
+                    a231 = [i * -1 for i in a231]
+
+                a241 = [int(i) for i in s241.split()]
+                if self.comboBox_10.currentText() =="<=":
+                    a241 = [i * -1 for i in a241]
+                rhs_ineq = []
+                rhs_ineq.append(a211)
+                rhs_ineq.append(a221)
+                rhs_ineq.append(a231)
+                rhs_ineq.append(a241)
+            if self.ogr_count == 5:
+                # левая часть уравнения
+
+                s21 = self.textEdit.toPlainText()
+                s22 = self.textEdit_2.toPlainText()
+                s23 = self.textEdit_3.toPlainText()
+                s24 = self.textEdit_4.toPlainText()
+                s25 = self.textEdit_5.toPlainText()
+                a22 = []
+                a21 = []
+                a23 = []
+                a24 = []
+                a25 = []
+
+                a21 = [int(i) for i in s21.split()]
+                if self.comboBox_7.currentText() == "<=":
+                    a21 = [i * -1 for i in a21]
+
+                a22 = [int(i) for i in s22.split()]
+                if self.comboBox_8.currentText() == "<=":
+                    a22 = [i * -1 for i in a22]
+
+                a23 = [int(i) for i in s23.split()]
+                if self.comboBox_9.currentText() == "<=":
+                    a23 = [i * -1 for i in a23]
+
+                a24 = [int(i) for i in s24.split()]
+                if self.comboBox_10.currentText() == "<=":
+                    a24 = [i * -1 for i in a24]
+
+                a25 = [int(i) for i in s25.split()]
+                if self.comboBox_11.currentText() == "<=":
+                    a25 = [i * -1 for i in a25]
+
+                lhs_ineq = []
+                lhs_ineq.append(a21)
+                lhs_ineq.append(a22)
+                lhs_ineq.append(a23)
+                lhs_ineq.append(a24)
+                lhs_ineq.append(a25)
+                # правая часть уравнения
+                s211 = self.textEdit_6.toPlainText()
+                s221 = self.textEdit_7.toPlainText()
+                s231 = self.textEdit_8.toPlainText()
+                s241 = self.textEdit_9.toPlainText()
+                s251 = self.textEdit_10.toPlainText()
+                a211 = []
+                a221 = []
+                a231 = []
+                a241 = []
+                a251 = []
+                a211 = [int(i) for i in s211.split()]
+                if self.comboBox_6.currentText() == "<=":
+                    a211 = [i * -1 for i in a211]
+                a221 = [int(i) for i in s221.split()]
+                if self.comboBox_7.currentText() == "<=":
+                    a221 = [i * -1 for i in a221]
+
+                a231 = [int(i) for i in s231.split()]
+                if self.comboBox_8.currentText() == "<=":
+                    a231 = [i * -1 for i in a231]
+
+                a241 = [int(i) for i in s241.split()]
+                if self.comboBox_9.currentText() == "<=":
+                    a241 = [i * -1 for i in a241]
+
+                a251 = [int(i) for i in s251.split()]
+                if self.comboBox_10.currentText() == "<=":
+                    a251 = [i * -1 for i in a251]
+                rhs_ineq = []
+                rhs_ineq.append(a211)
+                rhs_ineq.append(a221)
+                rhs_ineq.append(a231)
+                rhs_ineq.append(a241)
+                rhs_ineq.append(a251)
+
+            bnd=[]
+            bnd1 = ()
+            bnd2 = ()
+            bnd3 = ()
+            bnd4 = ()
+            bnd5 = ()
+            if self.comboBox_2.currentText() == "<=":
+                bnd1 = (float("inf"), 0)
+            else:
+                bnd1 = (0, float("inf"))
+
+            if self.comboBox_3.currentText() == "<=":
+                bnd2 = (float("inf"), 0)
+            else:
+                bnd2 = (0, float("inf"))
+
+            if self.comboBox.currentText() == "<=":
+                bnd3 = (float("inf"), 0)
+            else:
+                bnd3 = (0, float("inf"))
+
+            if self.comboBox_4.currentText() == "<=":
+                bnd4 = (float("inf"), 0)
+            else:
+                bnd4 = (0, float("inf"))
+
+            if self.comboBox_5.currentText() == "<=":
+                bnd5 = (float("inf"), 0)
+            else:
+                bnd5 = (0, float("inf"))
+            if self.var_count == 2:
+                bnd.append(bnd1)
+                bnd.append(bnd2)
+
+            elif self.var_count == 3:
+                bnd.append(bnd1)
+                bnd.append(bnd2)
+                bnd.append(bnd3)
+
+            elif self.var_count == 4:
+                bnd.append(bnd1)
+                bnd.append(bnd2)
+                bnd.append(bnd3)
+                bnd.append(bnd4)
+
+            elif self.var_count == 5:
+                bnd.append(bnd1)
+                bnd.append(bnd2)
+                bnd.append(bnd3)
+                bnd.append(bnd4)
+                bnd.append(bnd5)
+
+            opt = linprog(c=obj, A_ub=lhs_ineq, b_ub=rhs_ineq, bounds=bnd, method="revised simplex")
+            if opt.message == "Optimization terminated successfully.":
+                self.label_17.setText("Успешно!")
+                self.label_23.setText(str(opt.con))
+                self.label_24.setText(str(opt.fun))
+                self.label_25.setText(str(opt.x))
+                self.label_25.adjustSize()
+                self.label_23.adjustSize()
+            else:
+                self.label_17.setText("Решения нет!")
+
+        elif (self.respro and self.respro_r and self.respro_f) == 0:
+            self.er1 = QMessageBox()
+            self.er1.setWindowTitle("Ошибка!")
+            self.er1.setText(
+                "В введенных данных ошибка! \nОбратите внимание на кол-во перменных, на лишние пробелы или лишние символы!")
+            self.er1.setIcon(QMessageBox.Icon.Warning)
+            self.er1.setStandardButtons(QMessageBox.Cancel)
+            self.er1.exec_()
+
+    def pro_r(self):
+        if self.ogr_count == 2:
+            self.respro_r = 0
+            d = 0
+            e = self.textEdit_6.toPlainText()
+            # proverka est li simvoli
+            d = self.proc(e)
+            m =0
+            e = self.textEdit_7.toPlainText()
+            # proverka est li simvoli
+            m = self.proc(e)
+            if m+d ==2:
+                self.respro_r = 1
+            else:
+                self.respro_r = 0
+        elif self.ogr_count == 3:
+            self.respro_r = 0
+            d = 0
+            e = self.textEdit_6.toPlainText()
+            # proverka est li simvoli
+            d = self.proc(e)
+            m =0
+            e = self.textEdit_7.toPlainText()
+            # proverka est li simvoli
+            m = self.proc(e)
+            m1 =0
+            e = self.textEdit_8.toPlainText()
+            # proverka est li simvoli
+            m1 = self.proc(e)
+
+            if m+d+m1 ==3:
+                self.respro_r = 1
+            else:
+                self.respro_r = 0
+        elif self.ogr_count == 4:
+            self.respro_r = 0
+            d = 0
+            e = self.textEdit_6.toPlainText()
+            # proverka est li simvoli
+            d = self.proc(e)
+            m =0
+            e = self.textEdit_7.toPlainText()
+            # proverka est li simvoli
+            m = self.proc(e)
+            m1 =0
+            e = self.textEdit_8.toPlainText()
+            # proverka est li simvoli
+            m1 = self.proc(e)
+            m2 = 0
+            e = self.textEdit_9.toPlainText()
+            # proverka est li simvoli
+            m2 = self.proc(e)
+
+            if m+d+m1+m2 ==4:
+                self.respro_r = 1
+            else:
+                self.respro_r = 0
+        elif self.ogr_count == 5:
+            self.respro_r = 0
+            d = 0
+            e = self.textEdit_6.toPlainText()
+            # proverka est li simvoli
+            d = self.proc(e)
+            m =0
+            e = self.textEdit_7.toPlainText()
+            # proverka est li simvoli
+            m = self.proc(e)
+            m1 =0
+            e = self.textEdit_8.toPlainText()
+            # proverka est li simvoli
+            m1 = self.proc(e)
+            m2 = 0
+            e = self.textEdit_9.toPlainText()
+            # proverka est li simvoli
+            m2 = self.proc(e)
+            m3 = 0
+            e = self.textEdit_10.toPlainText()
+            # proverka est li simvoli
+            m3 = self.proc(e)
+
+            if m+d+m1+m2+m3 ==5:
+                self.respro_r = 1
+            else:
+                self.respro_r = 0
+
+#проверка функции
+    def pro_f(self):
+        self.respro_f =0
+        d = 0
+        m = 0
+        m1 = 0
+        d1 = 0
+        e = self.textEdit_11.toPlainText()
+        e1 = self.comboBox_12.currentText()
+        # proverka est li simvoli
+        d = self.proc(e)
+        m = self.provlen(e1, e)
+        if d+m == 2:
+            self.respro_f = 1
+        else:
+            self.respro_f = 0
+
+    def closew(self):
+        self.close()
+    def net1(self):
+        self.comboBox_6.setDisabled(False)
+
+        self.textEdit_11.setDisabled(False)
+        self.resetst()
+
+        if int(self.comboBox_13.currentText())== 2:
+            self.hi3()
+            self.hi4()
+            self.hi5()
+
+        elif int(self.comboBox_13.currentText()) == 3:
+            self.hi4()
+            self.hi5()
+
+        elif int(self.comboBox_13.currentText()) == 4:
+            self.hi5()
+
+        if int(self.comboBox_12.currentText())== 2:
+            self.var_count = 2
+        elif int(self.comboBox_12.currentText()) == 3:
+            self.var_count = 3
+        elif int(self.comboBox_12.currentText()) == 4:
+            self.var_count = 4
+        elif int(self.comboBox_12.currentText()) == 5:
+            self.var_count = 5
+
+        if self.var_count ==2:
+            self.comboBox_2.setDisabled(False)
+            self.comboBox_3.setDisabled(False)
+            self.comboBox.setDisabled(True)
+            self.comboBox_4.setDisabled(True)
+            self.comboBox_5.setDisabled(True)
+
+        elif self.var_count ==3:
+            self.comboBox_2.setDisabled(False)
+            self.comboBox_3.setDisabled(False)
+            self.comboBox.setDisabled(False)
+            self.comboBox_4.setDisabled(True)
+            self.comboBox_5.setDisabled(True)
+        elif self.var_count ==4:
+            self.comboBox_2.setDisabled(False)
+            self.comboBox_3.setDisabled(False)
+            self.comboBox.setDisabled(False)
+            self.comboBox_4.setDisabled(False)
+            self.comboBox_5.setDisabled(True)
+        elif self.var_count == 5:
+            self.comboBox_2.setDisabled(False)
+            self.comboBox_3.setDisabled(False)
+            self.comboBox.setDisabled(False)
+            self.comboBox_4.setDisabled(False)
+            self.comboBox_5.setDisabled(False)
+
+        if int(self.comboBox_13.currentText())== 2:
+            self.ogr_count= 2
+        elif int(self.comboBox_13.currentText()) == 3:
+            self.ogr_count = 3
+        elif int(self.comboBox_13.currentText()) == 4:
+            self.ogr_count = 4
+        elif int(self.comboBox_13.currentText()) == 5:
+            self.ogr_count = 5
+
+
+
+#функция очистки данных
+    def clear1(self):
+        self.label_17.setText("Результат")
+        self.textEdit.setText("")
+        self.textEdit_2.setText("")
+        self.textEdit_3.setText("")
+        self.textEdit_4.setText("")
+        self.textEdit_5.setText("")
+        self.textEdit_6.setText("")
+        self.textEdit_7.setText("")
+        self.textEdit_8.setText("")
+        self.textEdit_9.setText("")
+        self.textEdit_10.setText("")
+        self.textEdit_11.setText("")
+
+        self.var_count = 2
+        self.var_count = 2
+        self.textEdit.setDisabled(True)
+        self.textEdit_3.setDisabled(True)
+        self.textEdit_4.setDisabled(True)
+        self.textEdit_5.setDisabled(True)
+
+        self.textEdit_2.setDisabled(True)
+        self.textEdit_6.setDisabled(True)
+        self.textEdit_7.setDisabled(True)
+        self.textEdit_8.setDisabled(True)
+        self.textEdit_9.setDisabled(True)
+        self.textEdit_10.setDisabled(True)
+        self.textEdit_11.setDisabled(True)
+
+        self.comboBox_2.setDisabled(True)
+        self.comboBox_3.setDisabled(True)
+        self.comboBox_7.setDisabled(True)
+        self.comboBox_8.setDisabled(True)
+        self.comboBox_9.setDisabled(True)
+        self.comboBox_10.setDisabled(True)
+        self.comboBox_11.setDisabled(True)
+        self.comboBox.setDisabled(True)
+        self.comboBox_4.setDisabled(True)
+        self.comboBox_5.setDisabled(True)
+        self.comboBox_6.setDisabled(True)
+
+        self.label.setStyleSheet("color: rgb(0, 0, 0);")
+        self.label_2.setStyleSheet("color: rgb(0, 0, 0);")
+        self.label_3.setStyleSheet("color: rgb(0, 0, 0);")
+        self.label_4.setStyleSheet("color: rgb(0, 0, 0);")
+        self.label_5.setStyleSheet("color: rgb(0, 0, 0);")
+#функция которая возвращает исходное форматирование 
+    def resetst(self):
+            self.label.setStyleSheet("color: rgb(0, 0, 0);")
+            self.label_2.setStyleSheet("color: rgb(0, 0, 0);")
+            self.label_3.setStyleSheet("color: rgb(0, 0, 0);")
+            self.label_4.setStyleSheet("color: rgb(0, 0, 0);")
+            self.label_5.setStyleSheet("color: rgb(0, 0, 0);")
+
+            self.textEdit_2.setDisabled(False)
+            self.textEdit.setDisabled(False)
+            self.textEdit_3.setDisabled(False)
+            self.textEdit_4.setDisabled(False)
+            self.textEdit_5.setDisabled(False)
+
+            self.textEdit_6.setDisabled(False)
+            self.textEdit_7.setDisabled(False)
+            self.textEdit_8.setDisabled(False)
+            self.textEdit_9.setDisabled(False)
+            self.textEdit_10.setDisabled(False)
+
+
+            self.comboBox_3.setDisabled(False)
+            self.comboBox_2.setDisabled(False)
+            self.comboBox_7.setDisabled(False)
+            self.comboBox_8.setDisabled(False)
+            self.comboBox_9.setDisabled(False)
+            self.comboBox_10.setDisabled(False)
+            self.comboBox_11.setDisabled(False)
+
+
+    def hi3(self):
+            self.comboBox_9.setDisabled(True)
+            self.label_2.setStyleSheet("color: rgb(255, 0, 0);")
+            self.textEdit_8.setDisabled(True)
+            self.textEdit_3.setDisabled(True)
+    def hi4(self):
+            self.textEdit_4.setDisabled(True)
+            self.comboBox_10.setDisabled(True)
+            self.label.setStyleSheet("color: rgb(255, 0, 0);")
+            self.textEdit_9.setDisabled(True)
+    def hi5(self):
+            self.textEdit_5.setDisabled(True)
+            self.comboBox_11.setDisabled(True)
+            self.label_4.setStyleSheet("color: rgb(255, 0, 0);")
+            self.textEdit_10.setDisabled(True)
+#функция вызов проверок
+    def proverka_na_tip(self):
+        if int(self.comboBox_13.currentText()) == 2:
+            self.respro = 0
+            d = 0
+            m = 0
+            m1 = 0
+            d1 = 0
+            e = self.textEdit.toPlainText()
+            e1 = self.comboBox_12.currentText()
+            #proverka est li simvoli
+            d = self.proc(e)
+            if d:#proverka lenght
+                m = self.provlen(e1,e)
+
+            e = self.textEdit_2.toPlainText()
+            e1 = self.comboBox_12.currentText()
+            #proverka est li simvoli
+            d1 = self.proc(e)
+            if d1:#proverka lenght
+                m1 = self.provlen(e1,e)
+
+            if d1+m1+d+m == 4:
+                self.respro = 1
+            else:
+                self.respro = 0
+
+        elif int(self.comboBox_13.currentText()) == 3:
+            self.respro = 0
+            d = 0
+            m = 0
+            m1 = 0
+            d1 = 0
+            m2 = 0
+            d2 = 0
+            e = self.textEdit.toPlainText()
+            e1 = self.comboBox_12.currentText()
+            #proverka est li simvoli
+            d = self.proc(e)
+            if d:#proverka lenght
+                m = self.provlen(e1,e)
+
+            e = self.textEdit_2.toPlainText()
+            e1 = self.comboBox_12.currentText()
+            #proverka est li simvoli
+            d1 = self.proc(e)
+            if d1:#proverka lenght
+                m1 = self.provlen(e1,e)
+
+            e = self.textEdit_3.toPlainText()
+            e1 = self.comboBox_12.currentText()
+            #proverka est li simvoli
+            d2 = self.proc(e)
+            if d2:#proverka lenght
+                m2 = self.provlen(e1,e)
+
+            if d1+m1+d+m+d2+m2 == 6:
+                self.respro = 1
+            else:
+                self.respro = 0
+
+        elif int(self.comboBox_13.currentText()) == 4:
+            self.respro = 0
+            d = 0
+            m = 0
+            m1 = 0
+            d1 = 0
+            m2 = 0
+            d2 = 0
+            m3 = 0
+            d3 = 0
+            e = self.textEdit.toPlainText()
+            e1 = self.comboBox_12.currentText()
+            #proverka est li simvoli
+            d = self.proc(e)
+            if d:#proverka lenght
+                m = self.provlen(e1,e)
+
+            e = self.textEdit_2.toPlainText()
+            e1 = self.comboBox_12.currentText()
+            #proverka est li simvoli
+            d1 = self.proc(e)
+            if d1:#proverka lenght
+                m1 = self.provlen(e1,e)
+
+            e = self.textEdit_3.toPlainText()
+            e1 = self.comboBox_12.currentText()
+            #proverka est li simvoli
+            d2 = self.proc(e)
+            if d2:#proverka lenght
+                m2 = self.provlen(e1,e)
+
+            e = self.textEdit_4.toPlainText()
+            e1 = self.comboBox_12.currentText()
+            #proverka est li simvoli
+            d3 = self.proc(e)
+            if d3:#proverka lenght
+                m3 = self.provlen(e1,e)
+            if d1+m1+d+m+d2+m2+d3+m3== 8:
+                self.respro = 1
+            else:
+                self.respro = 0
+
+        elif int(self.comboBox_13.currentText()) == 5:
+            self.respro = 0
+            d = 0
+            m = 0
+            m1 = 0
+            d1 = 0
+            m2 = 0
+            d2 = 0
+            m3 = 0
+            d3 = 0
+            m4 = 0
+            d4 = 0
+            e = self.textEdit.toPlainText()
+            e1 = self.comboBox_12.currentText()
+            #proverka est li simvoli
+            d = self.proc(e)
+            if d:#proverka lenght
+                m = self.provlen(e1,e)
+
+            e = self.textEdit_2.toPlainText()
+            e1 = self.comboBox_12.currentText()
+            #proverka est li simvoli
+            d1 = self.proc(e)
+            if d1:#proverka lenght
+                m1 = self.provlen(e1,e)
+
+            e = self.textEdit_3.toPlainText()
+            e1 = self.comboBox_12.currentText()
+            #proverka est li simvoli
+            d2 = self.proc(e)
+            if d2:#proverka lenght
+                m2 = self.provlen(e1,e)
+
+            e = self.textEdit_4.toPlainText()
+            e1 = self.comboBox_12.currentText()
+            #proverka est li simvoli
+            d3 = self.proc(e)
+            if d3:#proverka lenght
+                m3 = self.provlen(e1,e)
+
+            e = self.textEdit_4.toPlainText()
+            e1 = self.comboBox_12.currentText()
+            #proverka est li simvoli
+            d4 = self.proc(e)
+            if d4:#proverka lenght
+                m4 = self.provlen(e1,e)
+
+            if d1+m1+d+m+d2+m2+d3+m3+d4+m4== 10:
+                self.respro = 1
+            else:
+                self.respro = 0
+
+    def proc(self,texted):
+        s1 = texted
+        result = ''.join(c for c in s1 if c.find("+"))
+        result = ''.join(c for c in result if c.find("-"))
+        result = ''.join(c for c in result if c.isnumeric() != 1)
+        result = ''.join(c for c in result if c.find(" "))
+        if not result and (not s1) == 0:
+            return 1
+        else:
+            return 0
+    def provlen(self,test,text):
+        s1 = text
+        l = int(test)
+        l = l-1
+        result = ''.join(c for c in s1 if c.isnumeric() != 1)
+        result = ''.join(c for c in result if c.find("-") != 0)
+        result = ''.join(c for c in result if c.find("+") != 0)
+        if len(result)!=l:
+            return 0
+        else:
+            return 1
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    w = MainWindow()
+    w.show()
+    sys.exit(app.exec_())
